@@ -11,6 +11,8 @@ Follow: Flashing Using the USB-to-eMMC Adapter (Preferred Way)
 
 # Software releases: https://wiki.pine64.org/wiki/ROCK64_Software_Releases#Debian
 
+use https://deb.debian.org/debian/dists/bookworm/main/installer-arm64/current/images/netboot/SD-card-images/
+
 # Concat the images: zcat firmware.rock64-rk3328.img.gz partition.img.gz > debian-installer.img
 
 On Windows systems, you have to first decompress the two parts separately,
