@@ -20,3 +20,25 @@ which can be done e.g. by using 7-Zip, and then concatenate the decompressed
 parts together by running the command
 
   copy /b firmware.<board_name>.img + partition.img complete_image.img
+
+
+
+#run home assistant docker 
+
+docker run -d \
+  --name home-assistant \
+  --privileged \
+  --restart=unless-stopped \
+  -p 8123:8123 \
+  -e TZ="America/Seattle" \
+  -v homeassistant_config:/config \
+  --network=host \
+  --device /dev/ttyUSB0:/dev/ttyUSB0 \
+  ghcr.io/home-assistant/home-assistant:stable
+
+
+docker stop home-assistant
+docker rm home-assistant
+docker pull homeassistant/home-assistant
+
+
