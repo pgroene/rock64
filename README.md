@@ -34,11 +34,13 @@ docker run -d \
   -v homeassistant_config:/config \
   --network=host \
   --device /dev/ttyUSB0:/dev/ttyUSB0 \
-  ghcr.io/home-assistant/home-assistant:stable
+   homeassistant/home-assistant
 
+#update
 
 docker stop home-assistant
-docker rm home-assistant
-docker pull homeassistant/home-assistant
 
+docker rm home-assistant
+
+docker pull homeassistant/home-assistant
 
