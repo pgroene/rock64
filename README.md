@@ -23,7 +23,7 @@ parts together by running the command
 
 
 
-#run home assistant docker 
+#run home assistant docker with normal volume
 
 docker run -d \
   --name home-assistant \
@@ -35,6 +35,9 @@ docker run -d \
   --network=host \
   --device /dev/ttyUSB0:/dev/ttyUSB0 \
    homeassistant/home-assistant
+
+#run home assistant docker with on different mounted volume
+docker run -d   --name home-assistant   --privileged   --restart=unless-stopped   -p 8123:8123   -e TZ="America/Seattle"   --mount type=volume,dst=/config,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device=/mount/docker/volumes/homeassistant   --network=host   --device /dev/ttyUSB0:/dev/ttyUSB0    homeassistant/home-assistant
 
 #update
 
