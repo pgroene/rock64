@@ -47,3 +47,30 @@ docker rm home-assistant
 
 docker pull homeassistant/home-assistant
 
+
+
+#Wispher
+
+docker run -d  --name wispher --restart=unless-stopped  -p 10300:10300 -v /path/to/local/data:/data rhasspy/wyoming-whisper --model base-int8 --language en
+
+tiny-int8 (43 MB)
+tiny (152 MB)
+base-int8 (80 MB)
+base (291 MB)
+small-int8 (255 MB)
+small (968 MB)
+medium-int8 (786 MB)
+medium (3.1 GB)
+
+#Piper
+
+docker run -d --restart=unless-stopped  -p 10200:10200 -v /path/to/local/data:/data rhasspy/wyoming-piper --voice en_US-lessac-medium
+
+#openwakeword
+
+docker run -d --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-openwakeword --preload-model 'ok_nabu'
+
+#snowboy
+
+docker run -d --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-snowboy
+
