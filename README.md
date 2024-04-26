@@ -46,6 +46,22 @@ docker run -d \
   --network=host \
   --device /dev/ttyUSB0:/dev/ttyUSB0 \
    homeassistant/home-assistant:2023.12.3
+
+https://smarthomecircle.com/install-zigbee2mqtt-with-home-assistant#running-zigbee2mqtt-as-a-docker-container
+
+docker run -d \
+  --name zigbee2mqtt \
+  --restart=unless-stopped \
+  -e TZ="America/Seattle" \
+  -v ./data:/app/data   \
+  -v /run/udev:/run/udev:ro \
+  --device /dev/ttyUSB2:/dev/ttyUSB2 \
+   koenkk/zigbee2mqtt
+
+
+       volumes:  
+      - ./data:/app/data  
+      - /run/udev:/run/udev:ro 
    
 #run home assistant docker with on different mounted volume
 docker run -d   --name home-assistant   --privileged   --restart=unless-stopped   -p 8123:8123   -e TZ="America/Seattle"   --mount type=volume,dst=/config,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device=/mount/docker/volumes/homeassistant   --network=host   --device /dev/ttyUSB0:/dev/ttyUSB0    homeassistant/home-assistant
