@@ -47,6 +47,20 @@ docker run -d \
   --device /dev/ttyUSB0:/dev/ttyUSB0 \
    homeassistant/home-assistant:2023.12.3
 
+# mqtt broker
+https://smarthomecircle.com/how-to-setup-mqtt-docker-container-with-home-assistant#running-mqtt-broker-as-a-docker-container-using-docker-compose
+docker run -d \
+  --name mosquitto \
+  --restart=unless-stopped \
+  -e TZ="America/Seattle" \
+  -v ./mosquitto:/mosquitto   \
+  -v ./mosquitto/data:/mosquitto/data \
+  -v ./mosquitto/log:/mosquitto/log \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  eclipse-mosquitto  
+  
+# zigbee2mqtt
 https://smarthomecircle.com/install-zigbee2mqtt-with-home-assistant#running-zigbee2mqtt-as-a-docker-container
 
 docker run -d \
@@ -59,9 +73,6 @@ docker run -d \
    koenkk/zigbee2mqtt
 
 
-       volumes:  
-      - ./data:/app/data  
-      - /run/udev:/run/udev:ro 
    
 #run home assistant docker with on different mounted volume
 docker run -d   --name home-assistant   --privileged   --restart=unless-stopped   -p 8123:8123   -e TZ="America/Seattle"   --mount type=volume,dst=/config,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device=/mount/docker/volumes/homeassistant   --network=host   --device /dev/ttyUSB0:/dev/ttyUSB0    homeassistant/home-assistant
