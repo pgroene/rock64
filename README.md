@@ -33,19 +33,9 @@ docker run -d \
   -e TZ="America/Seattle" \
   -v homeassistant_config:/config \
   --network=host \
-  --device /dev/ttyUSB0:/dev/ttyUSB0 \
+  --device /dev/zigbee1:/dev/ttyUSB0 \
+  --device /dev/modbus_current:/dev/ttyUSB1 \
    homeassistant/home-assistant
-
-docker run -d \
-  --name home-assistant \
-  --privileged \
-  --restart=unless-stopped \
-  -p 8123:8123 \
-  -e TZ="America/Seattle" \
-  -v homeassistant_config:/config \
-  --network=host \
-  --device /dev/ttyUSB0:/dev/ttyUSB0 \
-   homeassistant/home-assistant:2023.12.3
 
 # mqtt broker
 https://smarthomecircle.com/how-to-setup-mqtt-docker-container-with-home-assistant#running-mqtt-broker-as-a-docker-container-using-docker-compose
@@ -69,7 +59,7 @@ docker run -d \
   -e TZ="America/Seattle" \
   -v ./data:/app/data   \
   -v /run/udev:/run/udev:ro \
-  --device /dev/ttyUSB2:/dev/ttyUSB2 \
+  --device /dev/zigbee2:/dev/ttyUSB2 \
    koenkk/zigbee2mqtt
 
 
