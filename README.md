@@ -33,8 +33,9 @@ docker run -d \
   -e TZ="America/Seattle" \
   -v homeassistant_config:/config \
   --network=host \
-  --device /dev/zigbee1:/dev/ttyUSB0 \
+  --device /dev/zigbee0:/dev/ttyUSB0 \
   --device /dev/modbus_current:/dev/ttyUSB1 \
+  --label com.centurylinklabs.watchtower.enable=true \
    homeassistant/home-assistant
 
 # mqtt broker
@@ -48,6 +49,7 @@ docker run -d \
   -v ./mosquitto/log:/mosquitto/log \
   -p 1883:1883 \
   -p 9001:9001 \
+  --label com.centurylinklabs.watchtower.enable=true \
   eclipse-mosquitto  
   
 # zigbee2mqtt
@@ -59,7 +61,8 @@ docker run -d \
   -e TZ="America/Seattle" \
   -v ./data:/app/data   \
   -v /run/udev:/run/udev:ro \
-  --device /dev/zigbee2:/dev/ttyUSB2 \
+  --device /dev/zigbee1:/dev/ttyUSB2 \
+  --label com.centurylinklabs.watchtower.enable=true \
    koenkk/zigbee2mqtt
 
 
@@ -79,7 +82,7 @@ docker pull homeassistant/home-assistant
 
 #Wispher
 
-docker run -d  --name wispher --restart=unless-stopped  -p 10300:10300 -v /path/to/local/data:/data rhasspy/wyoming-whisper --model base-int8 --language en
+docker run -d  --name whisper --restart=unless-stopped --label com.centurylinklabs.watchtower.enable=true -p 10300:10300 -v /path/to/local/data:/data rhasspy/wyoming-whisper  --model base-int8 --language en
 
 tiny-int8 (43 MB)
 tiny (152 MB)
@@ -92,13 +95,13 @@ medium (3.1 GB)
 
 #Piper
 
-docker run -d --restart=unless-stopped  -p 10200:10200 -v /path/to/local/data:/data rhasspy/wyoming-piper --voice en_US-lessac-medium
+docker run -d --name piper --restart=unless-stopped --label com.centurylinklabs.watchtower.enable=true -p 10200:10200 -v /path/to/local/data:/data rhasspy/wyoming-piper --voice en_US-lessac-medium
 
 #openwakeword
 
-docker run -d --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-openwakeword --preload-model 'ok_nabu'
+docker run -d --name openwakeword --label com.centurylinklabs.watchtower.enable=true --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-openwakeword --preload-model 'ok_nabu'
 
 #snowboy
 
-docker run -d --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-snowboy
+docker run -d --name showboy --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-snowboy
 
