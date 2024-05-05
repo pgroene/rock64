@@ -34,10 +34,11 @@ docker run -d \
   -v homeassistant_config:/config \
   --network=host \
   --device /dev/zigbee0:/dev/ttyUSB0 \
-  --device /dev/modbus_current:/dev/ttyUSB1 \
   --label com.centurylinklabs.watchtower.enable=true \
    homeassistant/home-assistant
 
+--device /dev/modbus_current:/dev/modbus_current \
+  
 # mqtt broker
 https://smarthomecircle.com/how-to-setup-mqtt-docker-container-with-home-assistant#running-mqtt-broker-as-a-docker-container-using-docker-compose
 docker run -d \
@@ -61,7 +62,7 @@ docker run -d \
   -e TZ="America/Seattle" \
   -v ./data:/app/data   \
   -v /run/udev:/run/udev:ro \
-  --device /dev/zigbee1:/dev/ttyUSB2 \
+  --device /dev/zigbee1:/dev/ttyUSB1 \
   --label com.centurylinklabs.watchtower.enable=true \
    koenkk/zigbee2mqtt
 
