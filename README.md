@@ -60,6 +60,7 @@ docker run -d \
   --name zigbee2mqtt \
   --restart=unless-stopped \
   -e TZ="America/Seattle" \
+  -p 8080:8080
   -v ./data:/app/data   \
   -v /run/udev:/run/udev:ro \
   --device /dev/zigbee1:/dev/ttyUSB1 \
