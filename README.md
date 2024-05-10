@@ -38,6 +38,7 @@ docker run -d \
    homeassistant/home-assistant
 
 --device /dev/modbus_current:/dev/modbus_current \
+
   
 # mqtt broker
 https://smarthomecircle.com/how-to-setup-mqtt-docker-container-with-home-assistant#running-mqtt-broker-as-a-docker-container-using-docker-compose
@@ -107,3 +108,11 @@ docker run -d --name openwakeword --label com.centurylinklabs.watchtower.enable=
 
 docker run -d --name showboy --restart=unless-stopped  -p 10400:10400 rhasspy/wyoming-snowboy
 
+#watchtower
+
+docker run -d \
+  --name watchtower \
+  --restart=unless-stopped \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  containrrr/watchtower:latest
+   
