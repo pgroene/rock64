@@ -30,7 +30,7 @@ docker run -d \
   --privileged \
   --restart=unless-stopped \
   -p 8123:8123 \
-  -e TZ="America/Seattle" \
+  -e TZ="Europe/Amsterdam" \
   -v homeassistant_config:/config \
   --network=host \
   --device /dev/zigbee0:/dev/ttyUSB0 \
@@ -70,9 +70,6 @@ docker run -d \
 
 
    
-#run home assistant docker with on different mounted volume
-docker run -d   --name home-assistant   --privileged   --restart=unless-stopped   -p 8123:8123   -e TZ="America/Seattle"   --mount type=volume,dst=/config,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device=/mount/docker/volumes/homeassistant   --network=host   --device /dev/ttyUSB0:/dev/ttyUSB0    homeassistant/home-assistant
-
 #update
 
 docker stop home-assistant
