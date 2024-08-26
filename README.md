@@ -37,6 +37,17 @@ docker run -d \
   --label com.centurylinklabs.watchtower.enable=true \
    homeassistant/home-assistant
 
+docker run -d \
+  --name home-assistant \
+  --privileged \
+  --restart=unless-stopped \
+  -p 8123:8123 \
+  -e TZ="Europe/Amsterdam" \
+  -v homeassistant_config:/config \
+  --network=host \
+  --label com.centurylinklabs.watchtower.enable=true \
+   homeassistant/home-assistant
+
 --device /dev/modbus_current:/dev/modbus_current \
 
   
