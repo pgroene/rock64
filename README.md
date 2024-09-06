@@ -123,4 +123,10 @@ docker run -d \
   --restart=unless-stopped \
   -v /var/run/docker.sock:/var/run/docker.sock \
   containrrr/watchtower:latest
+
+
+Firmware update using docker:
+
+docker run --rm --device /dev/zigbee1:/dev/ttyUSB1 -e FIRMWARE_URL=https://github.com/Koenkk/Z-Stack-firmware/raw/master/coordinator/Z-Stack_3.x.0/bin/CC1352P2_CC2652P_launchpad_coordinator_20240710.zip ckware/ti-cc-tool -ewv -p /dev/ttyUSB1 --bootloader-sonoff-usb
+
    
