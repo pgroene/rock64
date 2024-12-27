@@ -135,6 +135,20 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
   containrrr/watchtower:latest
 
+#p1
+
+docker run -d -p 8090:80\
+       	-h p1mon\
+        --name=p1monitor\
+       	--tmpfs /tmp\
+       	--tmpfs /run\
+       	-v /docker/volumes/p1mon/data:/p1mon/data\
+       	-v /docker/volumes/p1mon/usbdisk:/p1mon/mnt/usb\
+       	-v /docker/volumes/p1mon/mnt/ramdisk:/p1mon/mnt/ramdisk\
+       	--device /dev/ttyUSB2:/dev/ttyUSB0\
+       	--restart=unless-stopped\
+       	mclaassen/p1mon
+        
 
 Firmware update using docker:
 
