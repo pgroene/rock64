@@ -145,7 +145,7 @@ docker run -d -p 8090:80\
        	-v /docker/volumes/p1mon/data:/p1mon/data\
        	-v /docker/volumes/p1mon/usbdisk:/p1mon/mnt/usb\
        	-v /docker/volumes/p1mon/mnt/ramdisk:/p1mon/mnt/ramdisk\
-       	--device /dev/ttyUSB2:/dev/ttyUSB0\
+       	--device /dev/p1:/dev/ttyUSB0\
        	--restart=unless-stopped\
        	mclaassen/p1mon
         
@@ -154,4 +154,14 @@ Firmware update using docker:
 
 docker run --rm --device /dev/zigbee1:/dev/ttyUSB1 -e FIRMWARE_URL=https://github.com/Koenkk/Z-Stack-firmware/raw/master/coordinator/Z-Stack_3.x.0/bin/CC1352P2_CC2652P_launchpad_coordinator_20240710.zip ckware/ti-cc-tool -ewv -p /dev/ttyUSB1 --bootloader-sonoff-usb
 
-   
+Bind a usb port to a static device
+
+ /etc/udev/rules.d/10-local.rules to contain:
+
+ACTION=="add", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", SYMLINK+="my_uart"
+You can check for the variables of your device by running
+
+udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0)
+
+
+
