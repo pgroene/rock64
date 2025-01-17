@@ -84,7 +84,7 @@ docker run -d \
   --restart=unless-stopped \
   -e TZ="America/Seattle" \
   -p 8081:8080 \
-  -v ./zigbee2mqtt_precense/data:/app/data   \
+  -v ./zigbee2mqtt_presence/data:/app/data   \
   -v /run/udev:/run/udev:ro \
   --device /dev/zigbee0:/dev/ttyUSB1 \
   --label com.centurylinklabs.watchtower.enable=true \
