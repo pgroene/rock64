@@ -44,6 +44,7 @@ docker run -d \
   -p 8123:8123 \
   -e TZ="Europe/Amsterdam" \
   -v homeassistant_config:/config \
+  --device /dev/serial/by-id/usb-FTDI_USB_Serial_Converter_FTB6SPL3-if00-port0:/dev/modbus \
   --network=host \
   --label com.centurylinklabs.watchtower.enable=true \
    homeassistant/home-assistant
