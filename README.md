@@ -91,7 +91,8 @@ docker run -d \
   --label com.centurylinklabs.watchtower.enable=true \
    koenkk/zigbee2mqtt
 
-
+Musuc assistant:
+docker run -d --name="music-assistant-server" --net=host --restart=unless-stopped --privileged -v /docker/volumes/music-assistant-server/data:/data ghcr.io/music-assistant/server
    
 #update
 
